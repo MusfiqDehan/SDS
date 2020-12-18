@@ -306,7 +306,7 @@ hr {
 @media only screen and (max-width: 815px) {
     #navbar ul {
         border: 1px solid;
-        height: 210px;
+        height: 200px;
     }
 
     #navbar {
