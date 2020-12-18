@@ -306,7 +306,7 @@ hr {
 @media only screen and (max-width: 815px) {
     #navbar ul {
         border: 1px solid;
-        height: 220px;
+        height: 210px;
     }
 
     #navbar {
@@ -329,7 +329,7 @@ hr {
     #main-doc {
         position: relative;
         margin-left: 0px;
-        margin-top: 270px;
+        margin-top: 300px;
     }
 
     #main-doc header {
