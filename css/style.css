@@ -12,6 +12,11 @@ body {
     color: rgba(0, 0, 0, 1);
 }
 
+.dark-mode {
+    background-color: rgba(0, 0, 0, 0.9);
+    color:#fff; 
+}
+
 @page {
     margin-top: 2cm;
 }
