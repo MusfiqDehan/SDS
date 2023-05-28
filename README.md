@@ -1,5 +1,8 @@
-# SDS
-A Template for Software Design Specification
+<div align="center">
+  <h1> Software Design Specification (SDS) </h1>
+  <p>A Template for Software Design Specification</p>
+  <br>
+</div>
 
 ![image](https://github.com/MusfiqDehan/SDS/assets/47440165/fcea0af8-075f-412c-b234-0c92e0682b59)
 
