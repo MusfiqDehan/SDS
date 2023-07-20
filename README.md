@@ -1,6 +1,8 @@
 <div align="center">
   <h1> Software Design Specification (SDS) </h1>
   <p>A Template for Software Design Specification</p>
+  
+  [![Netlify Status](https://api.netlify.com/api/v1/badges/562ef054-6fdc-4ef0-a4cf-b4408b11cad3/deploy-status)](https://app.netlify.com/sites/sds-template/deploys)
   <br>
 </div>
 
