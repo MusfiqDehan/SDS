@@ -928,9 +928,20 @@ body.dark tr:hover {
         border: 1px solid #000;
     }
 
-    #main-doc img,
-    table {
+    * {
         box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        -moz-box-shadow: none !important;
+    }
+    
+    #main-doc img,
+    table,
+    .article,
+    .control-btn,
+    .notification {
+        box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        -moz-box-shadow: none !important;
     }
 
     .not-for-print {
