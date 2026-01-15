@@ -4,11 +4,27 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="css/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
         <title>Software Design Specification - SDS</title>
+        <script>
+            tailwind.config = {
+                darkMode: 'class',
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        },
+                    }
+                }
+            }
+        </script>
     </head>
 
-    <body>
+    <body class="transition-colors duration-300">
         <!----------------- Cover Page (Only for print) ------------------------->
         <div class="cover-page print-only-div new-page">
             <h1 class="top-bar">Software Design</h1> 
@@ -102,18 +118,26 @@
         </div>
 
         <!----------------------- Left Navbar ----------------------->
-        <nav id="navbar">            
+        <nav id="navbar" class="transition-all duration-300">
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="mobile-menu-toggle">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            
             <header>
                 <img src="images/logo.png" alt="House logo">
                 <span>SDS</span> 
             </header>
-            <ul>
+            
+            <ul id="nav-menu">
                 <li class="nav-link dropdown">
-                    <a  href="#Introduction">Introduction</a>
+                    <a href="#Introduction">Introduction</a>
                 </li>
 
                 <li class="nav-link dropdown">
-                    <a  href="#Document_Conventions">Document Conventions</a>
+                    <a href="#Document_Conventions">Document Conventions</a>
                 </li>
 
                 <li class="nav-link dropdown">
@@ -125,11 +149,11 @@
                 </li>
 
                 <li class="nav-link dropdown">
-                    <a  href="#Class_Diagram">Class Diagram</a>
+                    <a href="#Class_Diagram">Class Diagram</a>
                 </li>
 
                 <li class="nav-link dropdown">
-                    <a  href="#Sequence_Diagram">Sequence Diagram</a>
+                    <a href="#Sequence_Diagram">Sequence Diagram</a>
                 </li>
 
                 <li class="nav-link dropdown">
@@ -145,8 +169,33 @@
 
         <!----------------- Right Side's Main Content ----------------------->
         <main id="main-doc">
+            <!-- Top Control Bar -->
+            <div class="control-bar">
+                <div class="control-buttons">
+                    <button id="theme-toggle" class="control-btn" title="Toggle theme">
+                        <svg class="sun-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                        <svg class="moon-icon w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
+                    
+                    <button id="download-btn" class="control-btn" title="Download as HTML">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                    </button>
+                    
+                    <button id="print-btn" class="control-btn" title="Print document">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
             <section id="Introduction" class="main-section">
-                <button class="mode">Dark Theme</button>
                 <h1><span class="print-only">1.</span>Introduction</h1>
                 <div class="article">
                     <p>
