@@ -129,6 +129,79 @@ downloadHtmlBtn.addEventListener('click', () => {
     showNotification(`${templateName} template downloaded successfully!`);
 });
 
+// Download as DOCX Functionality
+const downloadDocxBtn = document.getElementById('download-docx-btn');
+const editDocsBtn = document.getElementById('edit-docs-btn');
+
+function buildDocxContent() {
+    const activeTemplate = document.querySelector('.template-content:not(.hidden)');
+    if (!activeTemplate) {
+        return null;
+    }
+
+    const docxClone = activeTemplate.cloneNode(true);
+    docxClone.querySelectorAll('iframe, .not-for-print, .print-only-div').forEach(element => {
+        element.remove();
+    });
+
+    return `<!DOCTYPE html>
+        <html>
+            <head>
+                <meta charset="UTF-8">
+                <style>
+                    * { box-shadow: none !important; }
+                    body { font-family: "Times New Roman", Times, serif; color: #000; }
+                    h1 { font-size: 20px; margin: 16px 0 8px; }
+                    h2 { font-size: 16px; margin: 14px 0 6px; }
+                    h3 { font-size: 14px; margin: 12px 0 6px; }
+                    p, li { font-size: 12px; line-height: 1.6; }
+                    table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+                    table, th, td { border: 1px solid #000; }
+                    th, td { padding: 6px; text-align: left; }
+                    img { max-width: 100%; height: auto; box-shadow: none !important; }
+                </style>
+            </head>
+            <body>
+                ${docxClone.innerHTML}
+            </body>
+        </html>`;
+}
+
+function downloadDocx() {
+    if (typeof htmlDocx === 'undefined') {
+        showNotification('DOCX library failed to load. Please refresh and try again.');
+        return;
+    }
+
+    const activeTemplate = localStorage.getItem('template') || 'sds';
+    const templateName = activeTemplate.toUpperCase();
+    const content = buildDocxContent();
+    if (!content) {
+        return;
+    }
+
+    const docxBlob = htmlDocx.asBlob(content);
+    const url = URL.createObjectURL(docxBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${templateName}-Template-${new Date().toISOString().split('T')[0]}.docx`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    showNotification(`${templateName} template downloaded as DOCX.`);
+}
+
+downloadDocxBtn.addEventListener('click', () => {
+    downloadDocx();
+});
+
+editDocsBtn.addEventListener('click', () => {
+    downloadDocx();
+    window.open('https://docs.google.com/document/u/0/', '_blank');
+    showNotification('DOCX downloaded. Upload it to Google Docs to edit.');
+});
+
 // Download as PDF Functionality
 const downloadPdfBtn = document.getElementById('download-pdf-btn');
 const PDF_DIALOG_DELAY = 1000; // Delay before opening print dialog (ms)
@@ -182,7 +255,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Add active state to nav items based on scroll position
 const sections = document.querySelectorAll('.main-section');
-const navItems = document.querySelectorAll('.nav-link a');
+const desktopNavItems = document.querySelectorAll('.nav-link > a');
+const mobileNavItems = document.querySelectorAll('#mobile-bottom-nav a');
+const navItems = [...desktopNavItems, ...mobileNavItems];
 
 window.addEventListener('scroll', () => {
     let current = '';
@@ -202,4 +277,3 @@ window.addEventListener('scroll', () => {
         }
     });
 });
-
