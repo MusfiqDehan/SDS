@@ -116,36 +116,62 @@
             </header>
             
             <ul id="nav-menu">
-                <li class="nav-link dropdown">
+                <!-- SDS Sections -->
+                <li class="nav-link sds-only">
                     <a href="#Introduction">Introduction</a>
                 </li>
 
-                <li class="nav-link dropdown">
+                <li class="nav-link sds-only">
                     <a href="#Document_Conventions">Document Conventions</a>
                 </li>
 
-                <li class="nav-link dropdown">
+                <li class="nav-link sds-only">
                     <a href="#Description_of_Design_Components">Description of Design Components</a>
                 </li>
 
-                <li class="nav-link dropdown">
+                <li class="nav-link sds-only">
                     <a href="#High_Level_Component_Design">High Level Component Design</a>
                 </li>
 
-                <li class="nav-link dropdown">
+                <li class="nav-link sds-only">
                     <a href="#Class_Diagram">Class Diagram</a>
                 </li>
 
-                <li class="nav-link dropdown">
+                <li class="nav-link sds-only">
                     <a href="#Sequence_Diagram">Sequence Diagram</a>
                 </li>
 
-                <li class="nav-link dropdown">
+                <li class="nav-link sds-only">
                     <a href="#Database_Design">Database Design</a>
                 </li>
 
-                <li class="nav-link dropdown">
+                <li class="nav-link sds-only">
                     <a href="#Implementation_Plan">Implementation Plan</a>
+                </li>
+                
+                <!-- SRS Sections -->
+                <li class="nav-link srs-only hidden">
+                    <a href="#SRS_Introduction">Introduction</a>
+                </li>
+
+                <li class="nav-link srs-only hidden">
+                    <a href="#Overall_Description">Overall Description</a>
+                </li>
+
+                <li class="nav-link srs-only hidden">
+                    <a href="#External_Interface_Requirements">External Interface Requirements</a>
+                </li>
+
+                <li class="nav-link srs-only hidden">
+                    <a href="#System_Features">System Features</a>
+                </li>
+
+                <li class="nav-link srs-only hidden">
+                    <a href="#Nonfunctional_Requirements">Nonfunctional Requirements</a>
+                </li>
+
+                <li class="nav-link srs-only hidden">
+                    <a href="#Other_Requirements">Other Requirements</a>
                 </li>
             </ul>
         </nav>
@@ -155,6 +181,11 @@
         <main id="main-doc">
             <!-- Top Control Bar -->
             <div class="control-bar">
+                <div class="template-switcher">
+                    <button id="sds-tab" class="template-tab active" data-template="sds">SDS</button>
+                    <button id="srs-tab" class="template-tab" data-template="srs">SRS</button>
+                </div>
+                
                 <div class="control-buttons">
                     <button id="theme-toggle" class="control-btn" title="Toggle theme">
                         <svg class="sun-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -165,9 +196,15 @@
                         </svg>
                     </button>
                     
-                    <button id="download-btn" class="control-btn" title="Download as HTML">
+                    <button id="download-html-btn" class="control-btn" title="Download as HTML">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                    </button>
+                    
+                    <button id="download-pdf-btn" class="control-btn" title="Download as PDF">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
                         </svg>
                     </button>
                     
@@ -179,6 +216,8 @@
                 </div>
             </div>
             
+            <!-- SDS Template Content -->
+            <div id="sds-content" class="template-content">
             <section id="Introduction" class="main-section">
                 <h1><span class="print-only">1.</span>Introduction</h1>
                 <div class="article">
@@ -437,6 +476,401 @@
                    </table>
                 </div>                            
             </section>
+            </div>
+            <!-- End SDS Content -->
+
+            <!-- SRS Template Content -->
+            <div id="srs-content" class="template-content hidden">
+                <section id="SRS_Introduction" class="main-section">
+                    <h1><span class="print-only">1.</span>Introduction</h1>
+                    <div class="article">
+                        <h2 id="Purpose"><span class="print-only">1.1</span>Purpose</h2>
+                        <p>
+                            The purpose of this document is to present a detailed description of the Software Requirements Specification. 
+                            It will explain the purpose and features of the system, the interfaces of the system, 
+                            what the system will do, the constraints under which it must operate and how the system will react to external stimuli.
+                        </p>
+
+                        <h2 id="Document_Conventions_SRS"><span class="print-only">1.2</span>Document Conventions</h2>
+                        <p>
+                            This document follows the IEEE Software Requirements Specification template. 
+                            All requirements are prioritized as essential unless otherwise stated. 
+                            Technical terms are defined in the glossary.
+                        </p>
+
+                        <h2 id="Intended_Audience"><span class="print-only">1.3</span>Intended Audience</h2>
+                        <p>
+                            This document is intended for developers, project managers, marketing staff, users, testers, and documentation writers.
+                            Developers can use this document to understand system requirements and begin system design.
+                            Project managers can use this document to track project progress and deliverables.
+                        </p>
+
+                        <h2 id="Product_Scope"><span class="print-only">1.4</span>Product Scope</h2>
+                        <p>
+                            This software system will provide a comprehensive solution for [describe the main goal].
+                            The system will enable users to [list primary capabilities].
+                            By using this system, users will benefit from [list key benefits].
+                        </p>
+
+                        <h2 id="References"><span class="print-only">1.5</span>References</h2>
+                        <ul>
+                            <li>IEEE Std 830-1998 - IEEE Recommended Practice for Software Requirements Specifications</li>
+                            <li>[Add project-specific references]</li>
+                        </ul>
+                    </div>
+                    <hr>
+                </section>
+
+                <section id="Overall_Description" class="main-section">
+                    <h1><span class="print-only">2.</span>Overall Description</h1>
+                    <div class="article">
+                        <h2 id="Product_Perspective"><span class="print-only">2.1</span>Product Perspective</h2>
+                        <p>
+                            This system is a new self-contained product that will [describe how it fits into larger system].
+                            The system will interact with [list external systems or components].
+                        </p>
+
+                        <h2 id="Product_Functions"><span class="print-only">2.2</span>Product Functions</h2>
+                        <ul>
+                            <li>User authentication and authorization</li>
+                            <li>Data management and storage</li>
+                            <li>Report generation and analytics</li>
+                            <li>Real-time notifications</li>
+                            <li>[Add more functions as needed]</li>
+                        </ul>
+
+                        <h2 id="User_Classes"><span class="print-only">2.3</span>User Classes and Characteristics</h2>
+                        <ul>
+                            <li><strong>Administrator:</strong> High technical expertise, full system access</li>
+                            <li><strong>End User:</strong> Basic technical knowledge, limited access</li>
+                            <li><strong>Guest:</strong> No prior experience, read-only access</li>
+                        </ul>
+
+                        <h2 id="Operating_Environment"><span class="print-only">2.4</span>Operating Environment</h2>
+                        <ul>
+                            <li>Operating System: Windows 10+, macOS 10.14+, Linux</li>
+                            <li>Database: PostgreSQL 12+, MySQL 8+</li>
+                            <li>Web Browsers: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+</li>
+                            <li>Mobile: iOS 13+, Android 10+</li>
+                        </ul>
+
+                        <h2 id="Design_Constraints"><span class="print-only">2.5</span>Design and Implementation Constraints</h2>
+                        <ul>
+                            <li>Must comply with GDPR and data protection regulations</li>
+                            <li>Must be responsive and work on mobile devices</li>
+                            <li>Must support accessibility standards (WCAG 2.1 Level AA)</li>
+                            <li>System response time must not exceed 3 seconds</li>
+                        </ul>
+
+                        <h2 id="User_Documentation_SRS"><span class="print-only">2.6</span>User Documentation</h2>
+                        <p>
+                            The following user documentation will be provided:
+                        </p>
+                        <ul>
+                            <li>Online help system</li>
+                            <li>User manual (PDF and web-based)</li>
+                            <li>Quick start guide</li>
+                            <li>API documentation</li>
+                            <li>Video tutorials</li>
+                        </ul>
+
+                        <h2 id="Assumptions_Dependencies"><span class="print-only">2.7</span>Assumptions and Dependencies</h2>
+                        <ul>
+                            <li>Users have basic computer literacy</li>
+                            <li>Internet connection is available</li>
+                            <li>Third-party services remain operational</li>
+                        </ul>
+                    </div>
+                    <hr>
+                </section>
+
+                <section id="External_Interface_Requirements" class="main-section">
+                    <h1><span class="print-only">3.</span>External Interface Requirements</h1>
+                    <div class="article">
+                        <h2 id="User_Interfaces_SRS"><span class="print-only">3.1</span>User Interfaces</h2>
+                        <ul>
+                            <li>The UI shall follow material design principles</li>
+                            <li>Navigation shall be intuitive with clear visual hierarchy</li>
+                            <li>Forms shall provide real-time validation</li>
+                            <li>The interface shall be responsive across all devices</li>
+                        </ul>
+
+                        <h2 id="Hardware_Interfaces"><span class="print-only">3.2</span>Hardware Interfaces</h2>
+                        <p>
+                            The system shall interface with standard input/output devices including keyboard, mouse, 
+                            touchscreen, and network adapters. No specialized hardware is required.
+                        </p>
+
+                        <h2 id="Software_Interfaces"><span class="print-only">3.3</span>Software Interfaces</h2>
+                        <ul>
+                            <li><strong>Database:</strong> PostgreSQL/MySQL for data persistence</li>
+                            <li><strong>Payment Gateway:</strong> Stripe API for payment processing</li>
+                            <li><strong>Email Service:</strong> SendGrid for email notifications</li>
+                            <li><strong>Cloud Storage:</strong> AWS S3 for file storage</li>
+                        </ul>
+
+                        <h2 id="Communications_Interfaces"><span class="print-only">3.4</span>Communications Interfaces</h2>
+                        <ul>
+                            <li>HTTP/HTTPS protocols for web communication</li>
+                            <li>WebSocket for real-time updates</li>
+                            <li>RESTful API for third-party integrations</li>
+                            <li>OAuth 2.0 for secure authentication</li>
+                        </ul>
+                    </div>
+                    <hr>
+                </section>
+
+                <section id="System_Features" class="main-section">
+                    <h1><span class="print-only">4.</span>System Features</h1>
+                    <div class="article">
+                        <h2 id="Feature_Authentication"><span class="print-only">4.1</span>User Authentication</h2>
+                        <h3>Description and Priority</h3>
+                        <p>
+                            User authentication is a high priority feature that allows users to securely access the system.
+                        </p>
+                        <h3>Functional Requirements</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Requirement</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>REQ-1</td>
+                                    <td>System shall allow users to register with email and password</td>
+                                </tr>
+                                <tr>
+                                    <td>REQ-2</td>
+                                    <td>System shall validate email format during registration</td>
+                                </tr>
+                                <tr>
+                                    <td>REQ-3</td>
+                                    <td>System shall hash passwords using industry-standard algorithms</td>
+                                </tr>
+                                <tr>
+                                    <td>REQ-4</td>
+                                    <td>System shall provide password reset functionality</td>
+                                </tr>
+                                <tr>
+                                    <td>REQ-5</td>
+                                    <td>System shall support social login (Google, Facebook)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h2 id="Feature_Data_Management"><span class="print-only">4.2</span>Data Management</h2>
+                        <h3>Description and Priority</h3>
+                        <p>
+                            Data management is essential for CRUD operations on system entities.
+                        </p>
+                        <h3>Functional Requirements</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Requirement</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>REQ-6</td>
+                                    <td>System shall allow authorized users to create records</td>
+                                </tr>
+                                <tr>
+                                    <td>REQ-7</td>
+                                    <td>System shall allow users to view their own records</td>
+                                </tr>
+                                <tr>
+                                    <td>REQ-8</td>
+                                    <td>System shall allow users to update their records</td>
+                                </tr>
+                                <tr>
+                                    <td>REQ-9</td>
+                                    <td>System shall allow users to delete their records</td>
+                                </tr>
+                                <tr>
+                                    <td>REQ-10</td>
+                                    <td>System shall maintain audit trail of all changes</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h2 id="Feature_Search"><span class="print-only">4.3</span>Search and Filtering</h2>
+                        <h3>Description and Priority</h3>
+                        <p>
+                            Search functionality enables users to quickly find relevant information.
+                        </p>
+                        <h3>Functional Requirements</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Requirement</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>REQ-11</td>
+                                    <td>System shall provide full-text search capability</td>
+                                </tr>
+                                <tr>
+                                    <td>REQ-12</td>
+                                    <td>System shall support multiple filter criteria</td>
+                                </tr>
+                                <tr>
+                                    <td>REQ-13</td>
+                                    <td>System shall return search results within 2 seconds</td>
+                                </tr>
+                                <tr>
+                                    <td>REQ-14</td>
+                                    <td>System shall highlight search terms in results</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h2 id="Feature_Reporting"><span class="print-only">4.4</span>Reporting and Analytics</h2>
+                        <h3>Description and Priority</h3>
+                        <p>
+                            Reporting features provide insights through data visualization and exports.
+                        </p>
+                        <h3>Functional Requirements</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Requirement</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>REQ-15</td>
+                                    <td>System shall generate customizable reports</td>
+                                </tr>
+                                <tr>
+                                    <td>REQ-16</td>
+                                    <td>System shall export reports in PDF, Excel, and CSV formats</td>
+                                </tr>
+                                <tr>
+                                    <td>REQ-17</td>
+                                    <td>System shall provide interactive charts and graphs</td>
+                                </tr>
+                                <tr>
+                                    <td>REQ-18</td>
+                                    <td>System shall allow users to schedule automated reports</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr>
+                </section>
+
+                <section id="Nonfunctional_Requirements" class="main-section">
+                    <h1><span class="print-only">5.</span>Nonfunctional Requirements</h1>
+                    <div class="article">
+                        <h2 id="Performance_Requirements"><span class="print-only">5.1</span>Performance Requirements</h2>
+                        <ul>
+                            <li>System shall support 10,000 concurrent users</li>
+                            <li>Page load time shall not exceed 3 seconds</li>
+                            <li>Database queries shall execute in under 1 second</li>
+                            <li>System uptime shall be 99.9% or higher</li>
+                            <li>API response time shall be under 500ms</li>
+                        </ul>
+
+                        <h2 id="Safety_Requirements"><span class="print-only">5.2</span>Safety Requirements</h2>
+                        <ul>
+                            <li>System shall perform automated backups every 24 hours</li>
+                            <li>System shall maintain data redundancy across multiple servers</li>
+                            <li>System shall implement automatic failover mechanisms</li>
+                            <li>System shall log all critical operations for audit purposes</li>
+                        </ul>
+
+                        <h2 id="Security_Requirements"><span class="print-only">5.3</span>Security Requirements</h2>
+                        <ul>
+                            <li>System shall encrypt all data in transit using TLS 1.3</li>
+                            <li>System shall encrypt sensitive data at rest using AES-256</li>
+                            <li>System shall implement role-based access control (RBAC)</li>
+                            <li>System shall enforce strong password policies</li>
+                            <li>System shall implement rate limiting to prevent abuse</li>
+                            <li>System shall detect and prevent SQL injection attacks</li>
+                            <li>System shall implement CSRF protection</li>
+                            <li>System shall log all authentication attempts</li>
+                        </ul>
+
+                        <h2 id="Software_Quality_Attributes"><span class="print-only">5.4</span>Software Quality Attributes</h2>
+                        <ul>
+                            <li><strong>Reliability:</strong> System shall have Mean Time Between Failures (MTBF) > 720 hours</li>
+                            <li><strong>Availability:</strong> System shall be available 24/7 with 99.9% uptime</li>
+                            <li><strong>Maintainability:</strong> Code shall follow industry-standard style guides</li>
+                            <li><strong>Portability:</strong> System shall run on Windows, macOS, and Linux</li>
+                            <li><strong>Usability:</strong> New users shall complete basic tasks within 5 minutes</li>
+                            <li><strong>Scalability:</strong> System architecture shall support horizontal scaling</li>
+                        </ul>
+
+                        <h2 id="Business_Rules"><span class="print-only">5.5</span>Business Rules</h2>
+                        <ul>
+                            <li>Users must be 18 years or older to register</li>
+                            <li>Free trial period is limited to 30 days</li>
+                            <li>Data retention policy: 7 years for active accounts</li>
+                            <li>Subscription cancellation takes effect at end of billing period</li>
+                        </ul>
+                    </div>
+                    <hr>
+                </section>
+
+                <section id="Other_Requirements" class="main-section">
+                    <h1><span class="print-only">6.</span>Other Requirements</h1>
+                    <div class="article">
+                        <h2 id="Appendix_A"><span class="print-only">6.1</span>Appendix A: Glossary</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Term</th>
+                                    <th>Definition</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>API</td>
+                                    <td>Application Programming Interface</td>
+                                </tr>
+                                <tr>
+                                    <td>CRUD</td>
+                                    <td>Create, Read, Update, Delete operations</td>
+                                </tr>
+                                <tr>
+                                    <td>GDPR</td>
+                                    <td>General Data Protection Regulation</td>
+                                </tr>
+                                <tr>
+                                    <td>OAuth</td>
+                                    <td>Open Authorization standard</td>
+                                </tr>
+                                <tr>
+                                    <td>REST</td>
+                                    <td>Representational State Transfer</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h2 id="Appendix_B"><span class="print-only">6.2</span>Appendix B: Analysis Models</h2>
+                        <p>
+                            Analysis models including use case diagrams, data flow diagrams, and entity-relationship diagrams 
+                            are maintained in separate documentation.
+                        </p>
+
+                        <h2 id="Appendix_C"><span class="print-only">6.3</span>Appendix C: To Be Determined List</h2>
+                        <ul>
+                            <li>TBD-1: Specific payment gateway integration details</li>
+                            <li>TBD-2: Third-party service SLA requirements</li>
+                            <li>TBD-3: Detailed backup and disaster recovery procedures</li>
+                            <li>TBD-4: Specific internationalization requirements</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+            <!-- End SRS Content -->
 
         </main> 
         

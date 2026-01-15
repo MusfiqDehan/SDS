@@ -26,6 +26,43 @@ themeToggle.addEventListener('click', () => {
     }
 });
 
+// Template Switching Functionality
+const sdsTab = document.getElementById('sds-tab');
+const srsTab = document.getElementById('srs-tab');
+const sdsContent = document.getElementById('sds-content');
+const srsContent = document.getElementById('srs-content');
+const sdsNavItems = document.querySelectorAll('.sds-only');
+const srsNavItems = document.querySelectorAll('.srs-only');
+
+// Check for saved template preference or default to SDS
+const currentTemplate = localStorage.getItem('template') || 'sds';
+
+function switchTemplate(template) {
+    if (template === 'sds') {
+        sdsTab.classList.add('active');
+        srsTab.classList.remove('active');
+        sdsContent.classList.remove('hidden');
+        srsContent.classList.add('hidden');
+        sdsNavItems.forEach(item => item.classList.remove('hidden'));
+        srsNavItems.forEach(item => item.classList.add('hidden'));
+        localStorage.setItem('template', 'sds');
+    } else {
+        srsTab.classList.add('active');
+        sdsTab.classList.remove('active');
+        srsContent.classList.remove('hidden');
+        sdsContent.classList.add('hidden');
+        srsNavItems.forEach(item => item.classList.remove('hidden'));
+        sdsNavItems.forEach(item => item.classList.add('hidden'));
+        localStorage.setItem('template', 'srs');
+    }
+}
+
+// Initialize template on load
+switchTemplate(currentTemplate);
+
+sdsTab.addEventListener('click', () => switchTemplate('sds'));
+srsTab.addEventListener('click', () => switchTemplate('srs'));
+
 // Mobile Menu Toggle
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const navbar = document.getElementById('navbar');
@@ -60,8 +97,11 @@ printBtn.addEventListener('click', () => {
 });
 
 // Download as HTML Functionality
-const downloadBtn = document.getElementById('download-btn');
-downloadBtn.addEventListener('click', () => {
+const downloadHtmlBtn = document.getElementById('download-html-btn');
+downloadHtmlBtn.addEventListener('click', () => {
+    const activeTemplate = localStorage.getItem('template') || 'sds';
+    const templateName = activeTemplate.toUpperCase();
+    
     // Clone the document
     const clone = document.documentElement.cloneNode(true);
     
@@ -79,14 +119,29 @@ downloadBtn.addEventListener('click', () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `SDS-Template-${new Date().toISOString().split('T')[0]}.html`;
+    a.download = `${templateName}-Template-${new Date().toISOString().split('T')[0]}.html`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
     
     // Show success message
-    showNotification('Template downloaded successfully!');
+    showNotification(`${templateName} template downloaded successfully!`);
+});
+
+// Download as PDF Functionality
+const downloadPdfBtn = document.getElementById('download-pdf-btn');
+downloadPdfBtn.addEventListener('click', () => {
+    const activeTemplate = localStorage.getItem('template') || 'sds';
+    const templateName = activeTemplate.toUpperCase();
+    
+    // Show a message to use browser's print-to-PDF
+    showNotification(`Please use Print dialog (Ctrl+P / Cmd+P) and select "Save as PDF" to download ${templateName} as PDF`);
+    
+    // Automatically open print dialog after a short delay
+    setTimeout(() => {
+        window.print();
+    }, 1000);
 });
 
 // Notification function

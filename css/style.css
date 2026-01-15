@@ -379,12 +379,63 @@ body.dark #navbar #credit {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
 body.dark .control-bar {
     background: var(--nav-dark);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.template-switcher {
+    display: flex;
+    gap: 4px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    padding: 4px;
+}
+
+body.dark .template-switcher {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.template-tab {
+    padding: 8px 20px;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--text-light);
+}
+
+body.dark .template-tab {
+    color: var(--text-dark);
+}
+
+.template-tab:hover {
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.template-tab.active {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+.template-content {
+    display: block;
+}
+
+.template-content.hidden {
+    display: none;
 }
 
 .control-buttons {
