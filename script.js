@@ -131,6 +131,8 @@ downloadHtmlBtn.addEventListener('click', () => {
 
 // Download as PDF Functionality
 const downloadPdfBtn = document.getElementById('download-pdf-btn');
+const PDF_DIALOG_DELAY = 1000; // Delay before opening print dialog (ms)
+
 downloadPdfBtn.addEventListener('click', () => {
     const activeTemplate = localStorage.getItem('template') || 'sds';
     const templateName = activeTemplate.toUpperCase();
@@ -141,7 +143,7 @@ downloadPdfBtn.addEventListener('click', () => {
     // Automatically open print dialog after a short delay
     setTimeout(() => {
         window.print();
-    }, 1000);
+    }, PDF_DIALOG_DELAY);
 });
 
 // Notification function
