@@ -389,6 +389,7 @@ body.dark #mobile-bottom-nav {
 #mobile-bottom-nav ul {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
     list-style: none;
     margin: 0;
