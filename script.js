@@ -146,8 +146,9 @@ function buildDocxContent() {
         element.remove();
     });
     
-    // Remove all inline styles that might contain box-shadow
-    docxClone.querySelectorAll('*').forEach(element => {
+    // Remove box-shadow from elements that typically have them
+    const elementsToClean = 'img, table, .article, .control-btn, .notification, div, section';
+    docxClone.querySelectorAll(elementsToClean).forEach(element => {
         if (element.style) {
             element.style.boxShadow = 'none';
             element.style.webkitBoxShadow = 'none';
@@ -204,14 +205,14 @@ function buildDocxContent() {
 function downloadDocx() {
     if (typeof htmlDocx === 'undefined') {
         showNotification('DOCX library failed to load. Please refresh and try again.');
-        return;
+        return null;
     }
 
     const activeTemplate = localStorage.getItem('template') || 'sds';
     const templateName = activeTemplate.toUpperCase();
     const content = buildDocxContent();
     if (!content) {
-        return;
+        return null;
     }
 
     const docxBlob = htmlDocx.asBlob(content);
@@ -223,35 +224,22 @@ function downloadDocx() {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
-    showNotification(`${templateName} template downloaded as DOCX.`);
+    
+    return templateName;
 }
 
 downloadDocxBtn.addEventListener('click', () => {
-    downloadDocx();
+    const templateName = downloadDocx();
+    if (templateName) {
+        showNotification(`${templateName} template downloaded as DOCX.`);
+    }
 });
 
 editDocsBtn.addEventListener('click', () => {
-    if (typeof htmlDocx === 'undefined') {
-        showNotification('DOCX library failed to load. Please refresh and try again.');
+    const templateName = downloadDocx();
+    if (!templateName) {
         return;
     }
-
-    const activeTemplate = localStorage.getItem('template') || 'sds';
-    const templateName = activeTemplate.toUpperCase();
-    const content = buildDocxContent();
-    if (!content) {
-        return;
-    }
-
-    const docxBlob = htmlDocx.asBlob(content);
-    const url = URL.createObjectURL(docxBlob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `${templateName}-Template-${new Date().toISOString().split('T')[0]}.docx`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
     
     // Open Google Docs in a new tab with instructions
     showNotification(`${templateName} template downloaded. Opening Google Docs...`, 4000);
