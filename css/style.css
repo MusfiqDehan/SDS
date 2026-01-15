@@ -20,7 +20,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Inter', 'Open Sans', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', sans-serif;
     background-color: var(--bg-light);
     line-height: 1.6;
     color: var(--text-light);
@@ -35,6 +35,27 @@ body.dark {
 .dark-mode {
     background-color: var(--bg-dark);
     color: var(--text-dark); 
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+.w-5 {
+    width: 1.25rem;
+}
+
+.h-5 {
+    height: 1.25rem;
+}
+
+.w-6 {
+    width: 1.5rem;
+}
+
+.h-6 {
+    height: 1.5rem;
 }
 
 @page {
