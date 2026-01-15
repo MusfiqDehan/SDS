@@ -169,7 +169,7 @@ function buildDocxContent() {
 
 function downloadDocx() {
     if (typeof htmlDocx === 'undefined') {
-        showNotification('DOCX export is unavailable. Please try again.');
+        showNotification('DOCX library failed to load. Please refresh and try again.');
         return;
     }
 
@@ -255,7 +255,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Add active state to nav items based on scroll position
 const sections = document.querySelectorAll('.main-section');
-const navItems = document.querySelectorAll('.nav-link > a, #mobile-bottom-nav a');
+const desktopNavItems = document.querySelectorAll('.nav-link > a');
+const mobileNavItems = document.querySelectorAll('#mobile-bottom-nav a');
+const navItems = [...desktopNavItems, ...mobileNavItems];
 
 window.addEventListener('scroll', () => {
     let current = '';
