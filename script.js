@@ -140,6 +140,8 @@ function buildDocxContent() {
     }
 
     const docxClone = activeTemplate.cloneNode(true);
+    
+    // Remove elements that shouldn't be in the DOCX
     docxClone.querySelectorAll('iframe, .not-for-print, .print-only-div').forEach(element => {
         element.remove();
     });
@@ -149,16 +151,39 @@ function buildDocxContent() {
             <head>
                 <meta charset="UTF-8">
                 <style>
-                    * { box-shadow: none !important; }
-                    body { font-family: "Times New Roman", Times, serif; color: #000; }
-                    h1 { font-size: 20px; margin: 16px 0 8px; }
-                    h2 { font-size: 16px; margin: 14px 0 6px; }
-                    h3 { font-size: 14px; margin: 12px 0 6px; }
+                    * { 
+                        box-shadow: none !important; 
+                        -webkit-box-shadow: none !important;
+                        -moz-box-shadow: none !important;
+                    }
+                    body { 
+                        font-family: "Times New Roman", Times, serif; 
+                        color: #000; 
+                        background: #fff;
+                    }
+                    h1 { font-size: 20px; margin: 16px 0 8px; font-weight: bold; }
+                    h2 { font-size: 16px; margin: 14px 0 6px; font-weight: bold; }
+                    h3 { font-size: 14px; margin: 12px 0 6px; font-weight: bold; }
                     p, li { font-size: 12px; line-height: 1.6; }
-                    table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+                    ul, ol { margin: 12px 0; padding-left: 24px; }
+                    table { 
+                        width: 100%; 
+                        border-collapse: collapse; 
+                        margin: 12px 0; 
+                    }
                     table, th, td { border: 1px solid #000; }
-                    th, td { padding: 6px; text-align: left; }
-                    img { max-width: 100%; height: auto; box-shadow: none !important; }
+                    th, td { padding: 6px; text-align: left; font-size: 12px; }
+                    th { background-color: #3b82f6; color: #fff; font-weight: bold; }
+                    img { 
+                        max-width: 100%; 
+                        height: auto; 
+                        display: block;
+                        margin: 12px 0;
+                    }
+                    .article { 
+                        margin: 12px 0;
+                        background: transparent;
+                    }
                 </style>
             </head>
             <body>
@@ -170,14 +195,14 @@ function buildDocxContent() {
 function downloadDocx() {
     if (typeof htmlDocx === 'undefined') {
         showNotification('DOCX library failed to load. Please refresh and try again.');
-        return;
+        return null;
     }
 
     const activeTemplate = localStorage.getItem('template') || 'sds';
     const templateName = activeTemplate.toUpperCase();
     const content = buildDocxContent();
     if (!content) {
-        return;
+        return null;
     }
 
     const docxBlob = htmlDocx.asBlob(content);
@@ -189,17 +214,33 @@ function downloadDocx() {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
-    showNotification(`${templateName} template downloaded as DOCX.`);
+    
+    return templateName;
 }
 
 downloadDocxBtn.addEventListener('click', () => {
-    downloadDocx();
+    const templateName = downloadDocx();
+    if (templateName) {
+        showNotification(`${templateName} template downloaded as DOCX.`);
+    }
 });
 
 editDocsBtn.addEventListener('click', () => {
-    downloadDocx();
-    window.open('https://docs.google.com/document/u/0/', '_blank');
-    showNotification('DOCX downloaded. Upload it to Google Docs to edit.');
+    const templateName = downloadDocx();
+    if (!templateName) {
+        return;
+    }
+    
+    // Open Google Docs in a new tab with instructions
+    showNotification(`${templateName} template downloaded. Opening Google Docs...`, 4000);
+    
+    // Wait a moment before opening Google Docs so user sees the download
+    setTimeout(() => {
+        window.open('https://docs.google.com/document/u/0/', '_blank');
+        setTimeout(() => {
+            showNotification('Upload the downloaded DOCX file to Google Docs using File > Open > Upload', 5000);
+        }, 500);
+    }, 1000);
 });
 
 // Download as PDF Functionality
@@ -220,7 +261,7 @@ downloadPdfBtn.addEventListener('click', () => {
 });
 
 // Notification function
-function showNotification(message) {
+function showNotification(message, duration = 3000) {
     const notification = document.createElement('div');
     notification.textContent = message;
     notification.className = 'notification';
@@ -234,7 +275,7 @@ function showNotification(message) {
                 document.body.removeChild(notification);
             }
         }, 300);
-    }, 3000);
+    }, duration);
 }
 
 // Smooth scroll for navigation links
