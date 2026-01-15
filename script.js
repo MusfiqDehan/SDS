@@ -145,16 +145,6 @@ function buildDocxContent() {
     docxClone.querySelectorAll('iframe, .not-for-print, .print-only-div').forEach(element => {
         element.remove();
     });
-    
-    // Remove box-shadow from elements that typically have them
-    const elementsToClean = 'img, table, .article, .control-btn, .notification, div, section';
-    docxClone.querySelectorAll(elementsToClean).forEach(element => {
-        if (element.style) {
-            element.style.boxShadow = 'none';
-            element.style.webkitBoxShadow = 'none';
-            element.style.mozBoxShadow = 'none';
-        }
-    });
 
     return `<!DOCTYPE html>
         <html>

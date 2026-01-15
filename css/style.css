@@ -933,16 +933,6 @@ body.dark tr:hover {
         -webkit-box-shadow: none !important;
         -moz-box-shadow: none !important;
     }
-    
-    #main-doc img,
-    table,
-    .article,
-    .control-btn,
-    .notification {
-        box-shadow: none !important;
-        -webkit-box-shadow: none !important;
-        -moz-box-shadow: none !important;
-    }
 
     .not-for-print {
         display: none;
